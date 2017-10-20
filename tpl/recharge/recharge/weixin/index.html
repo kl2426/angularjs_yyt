@@ -1,0 +1,161 @@
+<div ui-view>
+	<div class="container">
+
+		<!--  选择账户   -->
+		<div class="m-card-id" ng-if="status == 1">
+			<div class="m-card-header clearfix">
+				<div class="title">请选择您需要充值的账户：</div>
+				<div class="time">
+					<div class="time-bg">
+						<span>{{countdown_time}}</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="m-card-dep">
+				<div class="dep-modal" style="width:520px">
+					<h4>选择账户</h4>
+					<div class="dep-modal-btn" style="margin-top: 30px;margin-bottom: 10px;">
+						<a class="btn btn-main" ng-click="statusFn1()">门诊账户</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+		<!--  输入金额   -->
+		<div class="m-card-id" ng-if="status == 2">
+			<div class="m-card-header clearfix">
+				<div class="title">当前业务：银行卡充值。</div>
+				<div class="time">
+					<div class="time-bg">
+						<span>{{countdown_time}}</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="card-id-desc">
+				<div class="id-left">
+					<h4 style="text-align: left;">用户信息</h4>
+					<ul>
+						<li>
+							<span>姓名：</span>
+							<input type="text" value="刘事国" disabled="disabled" />
+						</li>
+						<li>
+							<span>诊疗卡卡号：</span>
+							<input type="text" value="85019617" disabled="disabled" />
+						</li>
+					</ul>
+					<div class="left-mobile">
+						<div class="mobile">
+							<span>金额（元）：</span>
+							<div><input type="text" value="800" disabled="disabled" /></div>
+						</div>
+						<div class="text-right">
+							<button class="btn btn-main" ng-click="statusFn2()">确认</button>
+						</div>
+					</div>
+				</div>
+				<div class="id-right">
+					<ul>
+						<li><button ng-click="keyb(1)">1</button></li>
+						<li><button ng-click="keyb(2)">2</button></li>
+						<li><button ng-click="keyb(3)">3</button></li>
+						<li><button ng-click="keyb(4)">4</button></li>
+						<li><button ng-click="keyb(5)">5</button></li>
+						<li><button ng-click="keyb(6)">6</button></li>
+						<li><button ng-click="keyb(7)">7</button></li>
+						<li><button ng-click="keyb(8)">8</button></li>
+						<li><button ng-click="keyb(9)">9</button></li>
+						<li><button ng-click="keyb('backspace')">退格</button></li>
+						<li><button ng-click="keyb(0)">0</button></li>
+						<li><button ng-click="keyb('delete')">清除</button></li>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+		
+		<!--   二维码   -->
+		<div class="m-card-id" ng-if="status == 3">
+			<!--   提示    -->
+			<div class="m-card-header clearfix">
+				<div class="title">扫描二维码支付</div>
+				<div class="time">
+					<div class="time-bg">
+						<span>{{countdown_time}}</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-id-desc">
+				<div class="desc-msg">
+					<span>
+						<div class="col-xs-6 text-center"><img src="img/module/card/card004.png" width="200" height="200" /><p>微信支付</p></div>
+						<div class="col-xs-6 text-center"><img src="img/module/card/card004.png" width="200" height="200" /><p>支付宝付款</p></div>
+					</span>
+				</div>
+			</div>
+		</div>
+		
+		<!--   系统正在处理   -->
+		<div class="m-card-id" ng-if="status == 4">
+			<!--   提示    -->
+			<div class="m-card-header clearfix">
+				<div class="title"></div>
+				<div class="time">
+					<div class="time-bg">
+						<span></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-id-desc">
+				<div class="desc-msg">
+					<span>系统正在处理，请稍候。。。</span>
+				</div>
+			</div>
+		</div>
+		
+		<!--   正在打印凭条   -->
+		<div class="m-card-id" ng-if="status == 5">
+			<!--   提示    -->
+			<div class="m-card-header clearfix">
+				<div class="title"></div>
+				<div class="time">
+					<div class="time-bg">
+						<span></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-id-desc">
+				<div class="desc-msg">
+					<span>正在打印凭条，请稍候。。。</span>
+				</div>
+			</div>
+		</div>
+
+		<!--   充值成功   -->
+		<div class="m-card-id" ng-if="status == 6">
+			<!--   提示    -->
+			<div class="m-card-header clearfix">
+				<div class="title"></div>
+				<div class="time">
+					<div class="time-bg">
+						<span>{{countdown_time}}</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-id-desc">
+				<div class="desc-msg">
+					<span>充值成功，请取走您的凭条。</span>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

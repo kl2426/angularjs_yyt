@@ -1,0 +1,110 @@
+<div ui-view>
+	<div class="container">
+		<div class="m-index" ng-if="status == 1">
+			<!--   提示    -->
+			<div class="m-card-header clearfix">
+				<div class="title">
+					<font color="#f05050">充值前请核对您的账户信息是否正确</font>
+				</div>
+				<div class="time">
+					<div class="time-bg">
+						<span>{{countdown_time}}</span>
+					</div>
+				</div>
+			</div>
+			<!--   挂号    -->
+			<div class="m-card-dep">
+				<div class="dep-modal">
+					<h4>确认账户信息</h4>
+					<p>
+						<font style="color: #fff;">卡号：</font>85019617</p>
+					<p>
+						<font style="color: #fff;">姓名：</font>周在要</p>
+					<div class="dep-modal-btn">
+						<a class="btn btn-main" ng-click="statusFn1()">确认</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a class="btn btn-main">取消</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!--  现金充值   -->
+		<div class="m-card-id" ng-if="status == 2">
+			<div class="m-card-header clearfix">
+				<div class="title">当放钞口闪绿灯时放入现金，一次一张，可连续放入多张，当前接受面值为100元的纸币。办卡成功后将收取1元押金，剩余金额可在其他业务时使用。结束放现金，请按【结束放钞】按钮。</div>
+				<div class="time">
+					<div class="time-bg">
+						<span>{{countdown_time}}</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-id-desc">
+				<div class="desc-3-body">
+					<div class="col-xs-6 body-left">
+						<h3>账户姓名：王佳佳</h3>
+						<p>已放金额（元）：<span>100</span></p>
+						<p>账户余额（元）：<span>98.9</span></p>
+						<div>
+							<a class="btn btn-main hidden">返回</a>
+							<a class="btn btn-main" ng-click="statusFn2()">结束放钞</a>
+						</div>
+					</div>
+					<div class="col-xs-6 body-right">
+						<img src="img/module/card/card_id.png" />
+					</div>
+					<div class="col-xs-12 body-p">
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!--   系统正在处理中   -->
+		<div class="m-card-id" ng-if="status == 3">
+			<div class="m-card-header clearfix">
+				<div class="title"></div>
+			</div>
+
+			<div class="card-id-desc">
+				<div class="desc-msg">
+					<span>系统正在处理，请稍后。。。</span>
+				</div>
+			</div>
+		</div>
+
+		<!--   正在打印凭条   -->
+		<div class="m-card-id" ng-if="status == 4">
+			<div class="m-card-header clearfix">
+				<div class="title"></div>
+			</div>
+
+			<div class="card-id-desc">
+				<div class="desc-msg">
+					<span>正在打印凭条，请稍后。。。</span>
+				</div>
+			</div>
+		</div>
+
+		<!--   挂号成功   -->
+		<div class="m-card-id" ng-if="status == 5">
+			<!--   提示    -->
+			<div class="m-card-header clearfix">
+				<div class="title"></div>
+				<div class="time">
+					<div class="time-bg">
+						<span>{{countdown_time}}</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-id-desc">
+				<div class="desc-msg">
+					<span>现金充值成功，请取走您的凭条。</span>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

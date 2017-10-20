@@ -1,0 +1,50 @@
+<div ui-view>
+	<div class="container">
+		<div class="m-index">
+			<!--   提示    -->
+			<div class="m-card-header clearfix">
+				<div class="title">请选择您要办理的业务</div>
+				<div class="time">
+					<div class="time-bg">
+						<span>{{countdown_time}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="m-index-list">
+				<div class="text-center">
+					<ul>
+						<li class="bg-color bg-color-001">
+							<a ui-sref="app.recharge.recharge.money">
+								<i class="icon-001"></i>
+								<div>
+									<h4>现金充值</h4>
+									<p>用50元、100元的现金对诊疗卡充值</p>
+								</div>
+							</a>
+						</li>
+						<li class="bg-color bg-color-002">
+							<a ui-sref="app.recharge.recharge.card">
+								<i class="icon-001"></i>
+								<div>
+									<h4>银行卡充值</h4>
+									<p>用银行借记卡对诊疗卡充值</p>
+								</div>
+							</a>
+						</li>
+						<li class="bg-color bg-color-003">
+							<a ui-sref="app.recharge.recharge.weixin">
+								<i class="icon-001"></i>
+								<div>
+									<h4>手机充值</h4>
+									<p>用手扫描二维码充值</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>

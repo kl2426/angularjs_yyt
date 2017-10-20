@@ -1,0 +1,13 @@
+<div class="container">
+	<div class="m-header">
+		<div class="header-logo">
+			<a><img src="img/common/logo.png" /></a>
+		</div>
+		<div class="header-btn">
+			<a class="btn btn-info btn-001" ng-click="locationBk()" ng-class="{hidden:$state.includes('app.index')}"><img src="img/common/icon-bk.png" />返&nbsp;回</a>
+			<a class="btn btn-info btn-002 disabled" ng-class="{hidden:!$state.includes('app.index')}" onclick="terminal_device.in_out_card.cb_in_card()"><img src="img/common/icon-exit.png" />插&nbsp;卡</a>
+			<a class="btn btn-info btn-002" ng-class="{hidden:!$state.includes('app.index')}" onclick="terminal_device.in_out_card.cb_out_ok_card()"><img src="img/common/icon-exit.png" />退&nbsp;卡</a>
+			<a class="btn btn-info btn-003" ui-sref="app.index" ng-class="{hidden:$state.includes('app.index')}"><img src="img/common/icon-index.png" />主&nbsp;页</a>
+		</div>
+	</div>
+</div>
