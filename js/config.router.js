@@ -26,7 +26,7 @@ angular.module('app')
                   resolve: {
                     deps: ['$ocLazyLoad',
                       function( $ocLazyLoad ){
-                        return $ocLazyLoad.load(['js/controllers/modal/modal.js']);
+                        //return $ocLazyLoad.load(['js/controllers/modal/modal.js']);
                     }]
                   }
               })
@@ -183,6 +183,12 @@ angular.module('app')
                   url: '/payment',
                   templateUrl: 'tpl/recharge/payment/index.html',
                   controller: 'rechargePaymentCtrl'
+              })
+              //   缴费 - 支付
+              .state('app.recharge.payment.pay', {
+                  url: '/pay',
+                  templateUrl: 'tpl/recharge/payment/pay/index.html',
+                  controller: 'rechargePaymentPayCtrl'
               })
               
               //  =======================  / 缴费  ==========================

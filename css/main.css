@@ -248,4 +248,6 @@ li{list-style: none;}
 .m-take-list .list-body table tr td{height: 60px; padding: 0 10px;border: solid 1px #fff;font-size: 24px;}
 .m-take-list .list-body table tr td i.fa{font-size: 40px;}
 .m-take-list .list-body table tr td i.fa.fa-check-square-o{color:#19ffa3;}
+.m-take-list .list-body table tr td label input{position: absolute;display: block;width: 0; height: 0; opacity: 0;}
+.m-take-list .list-body table tr.checked td{background-color: rgba(0,0,0,0.2);}
 .m-take-list .list-body .page{margin: 30px 0; }

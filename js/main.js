@@ -231,6 +231,35 @@ angular.module('app')
 				
 			}
 			
+			//   系统错误
+			$scope.systemError = function(str) {
+				
+				//   打开 退卡弹窗
+				var modalInstance = $modal.open({
+					templateUrl: 'tpl/modal/modal_error.html',
+					controller: 'modalErrorCtrl',
+					windowClass:'g-modal-none',
+					animation:false,
+					backdrop:false,
+					resolve: {
+						items: function() {
+							return {'scope':$scope,'key':'modalErrorCtrl','keyctrl':'app.index'};
+						}
+					}
+				});
+		
+				modalInstance.result.then(function(selectedItem) {
+					console.log(selectedItem)
+					//   返回首页
+					$scope.locationBk('app.index');
+				}, function() {
+					//$log.info('Modal dismissed at: ' + new Date());
+				});
+				
+			}
+			//   run 系统错误
+			//$scope.systemError();
+			
 			
 			//  =========================  提示音  =============================
 			$scope.audio_list = {
@@ -245,6 +274,7 @@ angular.module('app')
 					{"id":"audio_008","name":"系统正在处理中，请稍候","src":"img/mp3/系统正在处理中，请稍候.ogg"},
 					{"id":"audio_009","name":"请取走您的凭条","src":"img/mp3/请取走您的凭条.ogg"},
 					{"id":"audio_010","name":"请取走您的诊疗卡","src":"img/mp3/请取走您的诊疗卡.ogg"},
+					{"id":"audio_011","name":"非常抱歉，系统发生故障，请移步到其他终端或到窗口办理","src":"img/mp3/非常抱歉，系统发生故障，请移步到其他终端或到窗口办理.ogg"},
 				],
 				//  播放
 				play:function(dom_id){

@@ -146,9 +146,171 @@ app.controller('rechargePaymentCtrl', function($scope,$interval) {
 	tm.fnAutoRefreshfn(tm);
 	
 	
+	/**
+	 * 表格1
+	 */
+	$scope.table_data = {
+		form:{
+			fucecode:"",
+			fuceismenu:"",
+			fucename:"",
+			fuceparentcode:"0",
+			ownerType:0,
+			page:1,
+			pageSize:10,
+			sortname:"a.FUCECREATETIME",
+			sortorder:"desc"
+		},
+		//   表格数据
+		table_res:{
+			code:"0001",
+			message:"ok",
+			rows:[
+				{"order":"1","title":"呼吸内科1","type":"专家","date":"2017年10月20日 下午","state":"未取号",checked:false},
+				{"order":"1","title":"呼吸内科1","type":"专家","date":"2017年10月20日 下午","state":"未取号"},
+				{"order":"1","title":"呼吸内科1","type":"专家","date":"2017年10月20日 下午","state":"未取号"},
+				{"order":"1","title":"呼吸内科1","type":"专家","date":"2017年10月20日 下午","state":"未取号"},
+				{"order":"1","title":"呼吸内科1","type":"专家","date":"2017年10月20日 下午","state":"未取号"},
+			],
+			total:2,
+			//
+			maxSize:5
+		},
+		//   翻页
+		pageChanged:function(){
+			//  查询
+			findFunctionList($scope.table_data.form);
+		},
+		//   每页显示多少条
+		selectChanged:function(){
+			findFunctionList($scope.table_data.form);
+		}
+	}
+	
+	
+	
 });
 
 
+
+/**
+ * 缴费 - 支付
+ */
+app.controller('rechargePaymentPayCtrl', function($scope,$interval,$timeout) {
+	
+	//   当前页面返回秒数
+	$scope.countdown_time = 20;
+	//   步骤状态  1,输入充值金额。2，插入银行卡。3，输入银行密码
+	$scope.status = 1;
+	
+	//开始定义定时器
+	var tm=$scope.setglobaldata.gettimer("rechargePaymentPayCtrl");
+	if(tm.Key!="rechargePaymentPayCtrl"){
+		tm.Key="rechargePaymentPayCtrl";
+		tm.keyctrl="app.recharge.payment.pay";
+		tm.fnAutoRefresh=function(){
+			console.log("开始调用定时器");
+			tm.interval = $interval(function() {
+				if($scope.countdown_time > 0){
+					$scope.countdown_time = $scope.countdown_time - 1;
+				}else{
+					$interval.cancel(tm.interval);
+					tm.interval = null;
+					$scope.countdown_time = 20;
+				}
+			}, 1000);
+		};
+		tm.fnStopAutoRefresh=function(){
+			$scope.countdown_time = 20;
+			console.log("进入取消方法");
+			if(tm.interval != null) {
+				$interval.cancel(tm.interval);
+				tm.interval = null;
+				console.log("进入取消成功");
+			}
+			tm.interval=null;
+		};
+		$scope.setglobaldata.addtimer(tm);
+	}
+	//结束定义定时器
+	
+	tm.fnAutoRefreshfn(tm);
+	
+	
+	//  1 选择支付方式
+	$scope.statusFn1 = function(str){
+		if(str == 'card'){
+			tm.fnStopAutoRefreshfn(tm);
+			$scope.countdown_time = 20;
+			$scope.status = 3;
+			$scope.statusFn3();
+		}else if(str == 'weixin'){
+			tm.fnStopAutoRefreshfn(tm);
+			$scope.countdown_time = 60;
+			tm.fnAutoRefreshfn(tm);
+			$scope.status = 2;
+			$scope.statusFn2();
+		}else if(str == 'alipay'){
+			tm.fnStopAutoRefreshfn(tm);
+			$scope.countdown_time = 60;
+			tm.fnAutoRefreshfn(tm);
+			$scope.status = 2;
+			$scope.statusFn2();
+		}
+		
+	}
+	
+	//  二维码支付
+	$scope.statusFn2 = function(){
+		//   
+		
+		//  
+		$timeout(function(){
+			$scope.status = 3;
+			$scope.statusFn3();
+		},2000);
+		
+		
+		//
+	}
+	
+	
+	//  系统正在处理
+	$scope.statusFn3 = function(){
+		
+		//
+		$timeout(function(){
+			$scope.statusFn4();
+		},2000);
+		
+	}
+	
+	//  正在打印凭条
+	$scope.statusFn4 = function(){
+		//   
+		$scope.status = 4;
+		//   
+		$timeout(function(){
+			$scope.statusFn5();
+		},2000);
+	}
+	
+	
+	//  充值成功
+	$scope.statusFn5 = function(){
+		$scope.status = 5;
+		//   
+		tm.fnStopAutoRefreshfn(tm);
+		$scope.countdown_time = 30;
+		tm.fnAutoRefreshfn(tm);
+	}
+	
+	
+	
+	
+	
+	
+});
 
 
 

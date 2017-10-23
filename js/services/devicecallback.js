@@ -15,10 +15,12 @@ var terminal_device = {
 	
 	//   build_card  建卡挂号
 	build_card:{
-		//  身份证回调  json string: str
+		//  身份证回调  
 		cb_id:null,
-		//  充值现金回调  int: i  单位分
+		//  充值现金回调 
 		cb_money:null,
+		//  关闭充值现金回调 
+		cb_money_close:null,
 		//  建卡成功回调  null
 		cb_card:null
 	}

@@ -268,4 +268,14 @@ angular.module('app').service('globalFn', function() {
     	return data_tree;
 	}
 	
+	/**
+	 * 凭条打印单据 文本 模板
+	 */
+	this.slipTemplate = {
+		//  挂号
+		"registration":function(){
+			
+		}
+	}
+	
 })

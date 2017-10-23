@@ -57,7 +57,7 @@ app.controller('cardCtrl', function($scope,$interval) {
 /**
  * 身份证建卡
  */
-app.controller('cardIdCtrl', function($scope,$interval,$timeout) {
+app.controller('cardIdCtrl', function($scope,$interval,$timeout,$filter) {
 	
 	//   状态  1, 放身份证。2，输入手机号码。3、放钞，结束放钞。4,系统正在处理。5，正在打印凭条，出卡
 	//  6,建卡成功
@@ -136,7 +136,10 @@ app.controller('cardIdCtrl', function($scope,$interval,$timeout) {
 				}else{
 					$interval.cancel(tm.interval);
 					tm.interval = null;
-					//$scope.countdown_time = 10;
+					//   关闭入钞口
+					if($scope.status == 3){
+						window.terminal && window.terminal.JSCloseCashFun('terminal_device.build_card.cb_money_close');
+					}
 					//   返回上一级
 					$scope.locationBk();
 				}
@@ -180,15 +183,53 @@ app.controller('cardIdCtrl', function($scope,$interval,$timeout) {
 	
 	//  回调
 	terminal_device.build_card.cb_id = function(obj){
-		//if(obj)alert(JSON.stringify(obj.MsgStr));
+		//if(obj)alert(JSON.stringify(obj));
+		//if(obj)alert(JSON.stringify(obj.MsgCode));
 		//
-		if(obj)angular.extend($scope.form_data, obj.MsgStr);
-		$scope.$apply();
+		if(obj && obj.MsgCode == '1000'){
+			angular.extend($scope.form_data, obj.MsgStr);
+			$scope.$apply();
+			
+			//
+			tm.fnStopAutoRefreshfn(tm);
+			$scope.countdown_time = 60;
+			tm.fnAutoRefreshfn(tm);
+			$scope.status = 2;
+		}
+		
+	}
+	
+	//  回调 放钞
+	terminal_device.build_card.cb_money = function(obj){
 		//
-		tm.fnStopAutoRefreshfn(tm);
-		$scope.countdown_time = 60;
-		tm.fnAutoRefreshfn(tm);
-		$scope.status = 2;
+		if(obj && obj.MsgCode == '1000'){
+			//if(obj)alert(JSON.stringify(obj));
+			//if(obj)alert(JSON.stringify(obj.MsgStr));
+			
+			$scope.money = $scope.money + +obj.MsgStr;
+			$scope.$apply();
+			//   提交用户充值记录
+			
+		}
+		
+	}
+	
+	//  回调 关闭放钞
+	terminal_device.build_card.cb_money_close = function(obj){
+		
+		//if(obj)alert(JSON.stringify(obj.MsgCode));
+		
+		//
+		if(obj && obj.MsgCode == '1000'){
+			//if(obj)alert(JSON.stringify(obj));
+			//if(obj)alert(JSON.stringify(obj.MsgStr));
+			
+			//$scope.money = $scope.money + +obj.MsgStr;
+			//$scope.$apply();
+			//   提交用户充值记录
+			
+		}
+		
 	}
 	
 	
@@ -197,16 +238,22 @@ app.controller('cardIdCtrl', function($scope,$interval,$timeout) {
 		
 		
 		tm.fnStopAutoRefreshfn(tm);
-		$scope.countdown_time = 60;
+		$scope.countdown_time = 120;
 		tm.fnAutoRefreshfn(tm);
 		$scope.status = 3;
 		//   播放声音
 		$scope.audio_list.allStop();
 		$scope.audio_list.play('audio_007');
+		//  放钞
+		window.terminal && window.terminal.JSOpenCashFun('terminal_device.build_card.cb_money');
 	}
 	
 	//   结束放钞
 	$scope.end = function(){
+		//  关闭放钞
+		window.terminal && window.terminal.JSCloseCashFun('terminal_device.build_card.cb_money_close');
+		
+		
 		tm.fnStopAutoRefreshfn(tm);
 		$scope.countdown_time = 60;
 		$scope.status = 4;
@@ -236,6 +283,14 @@ app.controller('cardIdCtrl', function($scope,$interval,$timeout) {
 	$scope.card_loadding = function(){
 		//  制卡
 		
+		//  打印凭条
+		var printTemplate = "建卡凭证\n\n" +
+							"打印时间：" + $filter('date')($scope.app.server_time, 'yyyy-MM-dd HH:mm:ss') + "\n\n" + 
+							"姓名：" + $scope.form_data.PeopleName + "\n\n" +
+							"卡号12345789\n\n" +
+							"充值金额：" + $scope.money + "\n\n" + 
+							"温馨提示：请保留本凭证";
+		window.terminal && window.terminal.PrintReceipt(printTemplate,'5','');
 		//  
 		$scope.status = 6;
 		
@@ -246,7 +301,9 @@ app.controller('cardIdCtrl', function($scope,$interval,$timeout) {
 	
 	//   制卡完成 提示返回上一步
 	$scope.card_ok = function(){
-		// 
+		
+		
+		
 		
 		//   播放声音
 		$scope.audio_list.allStop();
