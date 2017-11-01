@@ -63,6 +63,10 @@ app.controller('cardBookCtrl', function($scope,$interval,$timeout) {
 		$scope.countdown_time = 60;
 		$scope.status = 2;
 		
+		//   播放声音
+		$scope.audio_list.allStop();
+		$scope.audio_list.play('audio_008');
+		
 		//
 		$timeout(function(){
 			$scope.statusFn2();
@@ -90,6 +94,10 @@ app.controller('cardBookCtrl', function($scope,$interval,$timeout) {
 		//  
 		$scope.status = 4;
 		
+		//   播放声音
+		$scope.audio_list.allStop();
+		$scope.audio_list.play('audio_009');
+		
 		//
 		$timeout(function(){
 			$scope.statusFn4();
@@ -103,6 +111,9 @@ app.controller('cardBookCtrl', function($scope,$interval,$timeout) {
 		tm.fnStopAutoRefreshfn(tm);
 		$scope.countdown_time = 60;
 		tm.fnAutoRefreshfn(tm);
+		
+		
+		
 	}
 	
 	

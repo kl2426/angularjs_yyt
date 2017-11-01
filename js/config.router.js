@@ -92,10 +92,10 @@ angular.module('app')
               })
               
               //   挂号 选择门诊
-              .state('app.card.department.registered', {
-                  url: '/registered',
-                  templateUrl: 'tpl/card/department/registered/index.html',
-                  controller: 'cardDepartmentRegisteredCtrl',
+              .state('app.card.department.transit', {
+                  url: '/transit',
+                  templateUrl: 'tpl/card/department/transit/index.html',
+                  controller: 'cardDepartmentTransitCtrl',
                   resolve: {
                     deps: ['$ocLazyLoad',
                       function( $ocLazyLoad ){
@@ -104,11 +104,25 @@ angular.module('app')
                   }
               })
               
+              //   挂号 选择医生
+              .state('app.card.department.transit.registered', {
+                  url: '/registered',
+                  templateUrl: 'tpl/card/department/transit/registered/index.html',
+                  controller: 'cardDepartmentTransitRegisteredCtrl',
+                  resolve: {
+                    deps: ['$ocLazyLoad',
+                      function( $ocLazyLoad ){
+                        return $ocLazyLoad.load(['js/controllers/card/registered.js']);
+                    }]
+                  }
+              })
+              
+              
               //   挂号 确认挂号
-              .state('app.card.department.registered.dep', {
+              .state('app.card.department.transit.registered.dep', {
                   url: '/dep',
-                  templateUrl: 'tpl/card/department/registered/dep/index.html',
-                  controller: 'cardDepartmentRegisteredDepCtrl',
+                  templateUrl: 'tpl/card/department/transit/registered/dep/index.html',
+                  controller: 'cardDepartmentTransitRegisteredDepCtrl',
                   resolve: {
                     deps: ['$ocLazyLoad',
                       function( $ocLazyLoad ){

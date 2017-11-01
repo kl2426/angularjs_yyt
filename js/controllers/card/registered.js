@@ -53,20 +53,19 @@ app.controller('cardDepartmentCtrl', function($scope,$interval) {
 });
 
 
-
 /**
- * 挂号 选择科室
+ * 挂号 选择专科名称
  */
-app.controller('cardDepartmentRegisteredCtrl', function($scope,$interval) {
+app.controller('cardDepartmentTransitCtrl', function($scope,$interval) {
 	
 	//   当前页面返回秒数
 	$scope.countdown_time = 6000;
 	
 	//开始定义定时器
-	var tm=$scope.setglobaldata.gettimer("card_department_registered");
-	if(tm.Key!="card_department_registered"){
-		tm.Key="card_department_registered";
-		tm.keyctrl="app.card.department.registered";
+	var tm=$scope.setglobaldata.gettimer("cardDepartmentTransitCtrl");
+	if(tm.Key!="cardDepartmentTransitCtrl"){
+		tm.Key="cardDepartmentTransitCtrl";
+		tm.keyctrl="app.card.department.transit";
 		tm.fnAutoRefresh=function(){
 			console.log("开始调用定时器");
 			tm.interval = $interval(function() {
@@ -100,7 +99,61 @@ app.controller('cardDepartmentRegisteredCtrl', function($scope,$interval) {
 	
 	var run = function(){
 		//   播放声音
-		$scope.audio_list.play('audio_004');
+		$scope.audio_list.play('audio_012');
+	}
+	run();
+	
+});
+
+
+
+/**
+ * 挂号 选择医生
+ */
+app.controller('cardDepartmentTransitRegisteredCtrl', function($scope,$interval) {
+	
+	//   当前页面返回秒数
+	$scope.countdown_time = 60;
+	
+	//开始定义定时器
+	var tm=$scope.setglobaldata.gettimer("cardDepartmentTransitRegisteredCtrl");
+	if(tm.Key!="cardDepartmentTransitRegisteredCtrl"){
+		tm.Key="cardDepartmentTransitRegisteredCtrl";
+		tm.keyctrl="app.card.department.transit.registered";
+		tm.fnAutoRefresh=function(){
+			console.log("开始调用定时器");
+			tm.interval = $interval(function() {
+				if($scope.countdown_time > 0){
+					$scope.countdown_time = $scope.countdown_time - 1;
+				}else{
+					$interval.cancel(tm.interval);
+					tm.interval = null;
+					//$scope.countdown_time = 20;
+					//   返回上一级
+					$scope.locationBk();
+				}
+			}, 1000);
+		};
+		tm.fnStopAutoRefresh=function(){
+			$scope.countdown_time = 60;
+			console.log("进入取消方法");
+			if(tm.interval != null) {
+				$interval.cancel(tm.interval);
+				tm.interval = null;
+				console.log("进入取消成功");
+			}
+			tm.interval=null;
+		};
+		$scope.setglobaldata.addtimer(tm);
+	}
+	//结束定义定时器
+	
+	tm.fnAutoRefreshfn(tm);
+	
+	
+	var run = function(){
+		//   播放声音
+		//$scope.audio_list.play('audio_012');
 	}
 	run();
 	
@@ -114,7 +167,7 @@ app.controller('cardDepartmentRegisteredCtrl', function($scope,$interval) {
 /**
  * 挂号 确认挂号
  */
-app.controller('cardDepartmentRegisteredDepCtrl', function($scope,$interval,$timeout) {
+app.controller('cardDepartmentTransitRegisteredDepCtrl', function($scope,$interval,$timeout) {
 	
 	//   状态  1, 确认挂号。2，系统正在处理。3，打印凭条。4，挂号成功
 	$scope.status = 1;
@@ -130,10 +183,10 @@ app.controller('cardDepartmentRegisteredDepCtrl', function($scope,$interval,$tim
 	
 	
 	//开始定义定时器
-	var tm=$scope.setglobaldata.gettimer("card_department_registered_dep");
-	if(tm.Key!="card_department_registered_dep"){
-		tm.Key="card_department_registered_dep";
-		tm.keyctrl="app.card.department.registered.dep";
+	var tm=$scope.setglobaldata.gettimer("cardDepartmentTransitRegisteredDepCtrl");
+	if(tm.Key!="cardDepartmentTransitRegisteredDepCtrl"){
+		tm.Key="cardDepartmentTransitRegisteredDepCtrl";
+		tm.keyctrl="app.card.department.transit.registered.dep";
 		tm.fnAutoRefresh=function(){
 			console.log("开始调用定时器");
 			tm.interval = $interval(function() {

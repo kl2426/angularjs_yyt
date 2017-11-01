@@ -275,6 +275,10 @@ angular.module('app')
 					{"id":"audio_009","name":"请取走您的凭条","src":"img/mp3/请取走您的凭条.ogg"},
 					{"id":"audio_010","name":"请取走您的诊疗卡","src":"img/mp3/请取走您的诊疗卡.ogg"},
 					{"id":"audio_011","name":"非常抱歉，系统发生故障，请移步到其他终端或到窗口办理","src":"img/mp3/非常抱歉，系统发生故障，请移步到其他终端或到窗口办理.ogg"},
+					{"id":"audio_012","name":"请选择您要挂号的专科名称","src":"img/mp3/请选择您要挂号的专科名称.ogg"},
+					{"id":"audio_013","name":"业务处理成功，请取走您的凭条","src":"img/mp3/业务处理成功，请取走您的凭条.ogg"},
+					{"id":"audio_014","name":"请将您的银行卡插入银联读卡器","src":"img/mp3/请将您的银行卡插入银联读卡器.ogg"},
+					{"id":"audio_014","name":"请将您的银行卡插入银联读卡器","src":"img/mp3/请将您的银行卡插入银联读卡器.ogg"},
 				],
 				//  播放
 				play:function(dom_id){

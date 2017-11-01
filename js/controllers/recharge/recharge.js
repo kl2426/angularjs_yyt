@@ -368,8 +368,13 @@ app.controller('rechargeRechargeMoneyCtrl', function($scope,$interval,$timeout) 
 		
 		//  
 		tm.fnStopAutoRefreshfn(tm);
-		$scope.countdown_time = 20;
+		$scope.countdown_time = 180;
+		tm.fnAutoRefreshfn(tm);
 		$scope.status = 2;
+		
+		//   播放声音
+		$scope.audio_list.allStop();
+		$scope.audio_list.play('audio_007');
 		
 	}
 	
@@ -378,7 +383,13 @@ app.controller('rechargeRechargeMoneyCtrl', function($scope,$interval,$timeout) 
 		//   验证返回信息
 		
 		//  
+		tm.fnStopAutoRefreshfn(tm);
+		$scope.countdown_time = 60;
 		$scope.status = 3;
+		
+		//   播放声音
+		$scope.audio_list.allStop();
+		$scope.audio_list.play('audio_008');
 		
 		//
 		$timeout(function(){
@@ -406,6 +417,11 @@ app.controller('rechargeRechargeMoneyCtrl', function($scope,$interval,$timeout) 
 		//   
 		
 		$scope.status = 5;
+		
+		//   播放声音
+		$scope.audio_list.allStop();
+		$scope.audio_list.play('audio_013');
+		
 		//   
 		$timeout(function(){
 			$scope.statusFn5();
@@ -419,6 +435,13 @@ app.controller('rechargeRechargeMoneyCtrl', function($scope,$interval,$timeout) 
 		$scope.countdown_time = 20;
 		tm.fnAutoRefreshfn(tm);
 	}
+	
+	var run = function(){
+		//   播放声音
+		$scope.audio_list.allStop();
+		$scope.audio_list.play('audio_006');
+	}
+	run();
 	
 	
 });
@@ -527,6 +550,10 @@ app.controller('rechargeRechargeCardCtrl', function($scope,$interval,$modal,$tim
 		tm.fnAutoRefreshfn(tm);
 		$scope.status = 3;
 		
+		//   播放声音
+		$scope.audio_list.allStop();
+		$scope.audio_list.play('audio_014');
+		
 		
 		//
 	}
@@ -536,6 +563,8 @@ app.controller('rechargeRechargeCardCtrl', function($scope,$interval,$modal,$tim
 	$scope.statusFn3 = function(){
 		//  
 		
+		
+		
 		//  
 		tm.fnStopAutoRefreshfn(tm);
 		$scope.countdown_time = 60;
@@ -544,7 +573,7 @@ app.controller('rechargeRechargeCardCtrl', function($scope,$interval,$modal,$tim
 		//
 		$timeout(function(){
 			$scope.statusFn4();
-		},2000);
+		},5000);
 		
 	}
 	
@@ -612,7 +641,12 @@ app.controller('rechargeRechargeCardCtrl', function($scope,$interval,$modal,$tim
 		tm.fnAutoRefreshfn(tm);
 	}
 	
-	
+	var run = function(){
+		//   播放声音
+		$scope.audio_list.allStop();
+		$scope.audio_list.play('audio_006');
+	}
+	run();
 	
 	
 });
